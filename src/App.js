@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Clarifai from 'clarifai';
 import Particles from "react-particles-js";
-
+import env from 'react-dotenv';
 import Navigation from "./components/Navigation/Navigation";
 import Logo from "./components/Logo/Logo";
 import ImageLinkForm from "./components/ImageLinkForm/ImageLinkForm";
@@ -12,7 +12,7 @@ import SignIn from "./components/SignIn/SignIn";
 import Register from "./components/Register/Register"
 
 const app = new Clarifai.App({
- apiKey: 'f25f30c82df64584b5317d4a6c5dad22'
+ apiKey: process.env.REACT_API_KEY
 });
 
 const particlesOptions = {
