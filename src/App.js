@@ -11,8 +11,9 @@ import Rank from "./components/Rank/Rank";
 import SignIn from "./components/SignIn/SignIn";
 import Register from "./components/Register/Register"
 
+
 const app = new Clarifai.App({
- apiKey: process.env.REACT_API_KEY
+ apiKey: env.REACT_APP_KEY
 });
 
 const particlesOptions = {
