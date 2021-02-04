@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import Clarifai from 'clarifai';
 import Particles from "react-particles-js";
 import env from 'react-dotenv';
@@ -10,7 +9,7 @@ import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
 import Rank from "./components/Rank/Rank";
 import SignIn from "./components/SignIn/SignIn";
 import Register from "./components/Register/Register"
-
+import './App.css';
 
 const app = new Clarifai.App({
  apiKey: env.REACT_APP_KEY
@@ -27,23 +26,26 @@ const particlesOptions = {
     }
   }
 }
+
+const initialState = {
+  input: '',
+  imageUrl: '',
+  box: {},
+  route: 'signin',
+  isSignedIn: false,
+  user: {
+    id: '',
+    name: '',
+    email: '',
+    entries: 0,
+    joined: ''
+  }
+}
+
 class App extends Component {
   constructor() {
     super();
-    this.state = {
-      input: '',
-      imageUrl: '',
-      box: {},
-      route: 'signin',
-      isSignedIn: false,
-      user: {
-            id: '',
-            name: '',
-            email: '',
-            entries: '0',
-            joined: ''
-      }
-    }
+    this.state = initialState;
   }
   
   loadUser =  (data) => {
@@ -94,7 +96,8 @@ class App extends Component {
             })
           })
             .then((res) => res.json())
-            .then((count) => this.setState(Object.assign(this.state.user, { entries: count})))
+            .then((count) => this.setState(Object.assign(this.state.user, { entries: count })))
+          .catch(console.log)
         }
         this.displayFaceBox(this.calculateFaceLocation(response))
       })
@@ -102,7 +105,7 @@ class App extends Component {
   }
   onRouteChange = (route) => {
     if (route === 'signout') {
-      this.setState({isSignedIn: false})
+      this.setState(initialState)
     } else if (route === 'home') {
       this.setState({isSignedIn: true})
     }
