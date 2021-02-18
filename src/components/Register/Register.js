@@ -33,6 +33,7 @@ class Register extends Component {
                     this.props.onRouteChange("home");
                 }
             })
+            .catch(err => console.log(err));
     }
     
     render() {
